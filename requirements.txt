@@ -10,7 +10,8 @@ ffmpeg-python
 gitpython
 hachoir
 heroku3
-httpx[http2]
+httpx[http2.27.2]
+httpcore==1.0.6
 lyricsgenius
 motor==2.5.0
 wget
@@ -34,10 +35,10 @@ tgcrypto
 urllib3
 uvloop
 flask
+urllib3==2.2.3
 gunicorn==20.1.0
 git+https://github.com/KurimuzonAkuma/pyrogram@dev
 git+https://github.com/joetats/youtube_search@master
 git+https://github.com/badmunda98/yt-dp-fork
-git+https://github.com/badmunda98/yt-dlp-youtube-oauth3
-#git+https://github.com/badmunda98/yt-dlp-youtube-oauth2
-
+git+https://github.com/badmunda98/yt-dlp-youtube-oauth2
+#https://github.com/badmunda98/yt-dlp-youtube-oauth3

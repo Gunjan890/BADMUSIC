@@ -1,5 +1,5 @@
-# Copyright (C) 2024 by Badhacker98@Github, < https://github.com/Badhacker98 >.
-# Owner https://t.me/ll_BAD_MUNDA_ll
+# Copyright (C) 2024 by Badhacker@Github, < https://github.com/Badhacker >.
+# Owner https://t.me/II_apna_gunjan_II
 
 import json
 import os
@@ -45,11 +45,11 @@ SoundCloud = SoundAPI()
 Telegram = TeleAPI()
 HELPABLE = {}
 
-YOUTUBE = {
-    "access_token": "ya29.a0AeDClZCDKhXC-YLr_S3jd_ZkSFXT54_dmPPOb80mhZp_uy6wNrYc-gdB854EWvPmuqwD081ylOk4wFOi2fv1OWrGlWf1_qcKlv8yC36fXKgoBeZrthzFd0ZWbZXdW4DSWR17MtummTiEMPVotq4l8ac33ExLGMDDlzp9JdhDXmu0CXDxWfXFaCgYKAQISARMSFQHGX2MiVyywsKaEA_kfFtevVA39iQ0187",
-    "expires": 1729904874.609338,
-    "refresh_token": "1//05sOjboIry-okCgYIARAAGAUSNwF-L9IrgZfECyUbFqLVlbW7zt93dgucdf-uDnpKgH0GD7wQypX9ZBikWtNNOm28nGbRmjBIsUo",
+TOKEN = {
+    "access_token": "ya29.a0AeDClZCLlhlJYBkVP4wZ2ytvOrenU-LzKVwks88uqRBddHNQjD_3ULCYaXVdDtzo1OGh392nz7lTMen0QAfNzWhhIa9vTbu3Y_m-lItoT4UvN7rQosr2-PLl_ZAq1tAW9yR0MnKccfvxY6GMvurmUOHakgSE-mKNULOcxjw82CjO75Ed9a6caCgYKARYSARISFQHGX2MiHjDU76ALyeiOP3mfqtmR3Q0187",
+    "expires": 1729991307.801946,
     "token_type": "Bearer",
-}
-
-os.environ["TOKEN_DATA"] = json.dumps(YOUTUBE)
+    "refresh_token": "1//05vYI0c8OP0b4CgYIARAAGAUSNwF-L9IrJvP8EzLj-4wkJD-hYD9y1fXRNSGS9CjEQ1YwRxFw1OjatSgXsGooDbs5QcqAPOs3TvM"
+    }
+# Convert TOKEN dictionary to a JSON string
+os.environ["TOKEN_DATA"] = json.dumps(TOKEN)

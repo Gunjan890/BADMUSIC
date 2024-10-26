@@ -1,5 +1,5 @@
-# Copyright (C) 2024 by Badhacker@Github, < https://github.com/Badhacker >.
-# Owner https://t.me/II_apna_gunjan_II
+# Copyright (C) 2024 by Badhacker98@Github, < https://github.com/Badhacker98 >.
+# Owner https://t.me/ll_BAD_MUNDA_ll
 
 import json
 import os

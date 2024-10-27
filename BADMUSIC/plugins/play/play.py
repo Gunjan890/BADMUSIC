@@ -1,5 +1,3 @@
-# Copyright (C) 2024 by Badhacker98@Github, < https://github.com/Badhacker98 >.
-# Owner https://t.me/ll_BAD_MUNDA_ll
 
 import asyncio
 import random
@@ -8,7 +6,7 @@ from time import time
 
 from pyrogram import filters
 from pyrogram.errors import FloodWait
-from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
 from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
@@ -36,6 +34,8 @@ user_command_count = {}
 SPAM_WINDOW_SECONDS = 5  # Set the time window for spam checks (5 seconds for example)
 SPAM_THRESHOLD = 2
 
+audio = "CQACAgUAAx0CdRUi1wABAUQ3Zx2GHIqq269V3VKFNWFS5RSiTpUAAu4TAAJl6fFUeEVpdWbJ-KEeBA"
+
 
 @app.on_message(
     filters.command(
@@ -54,16 +54,22 @@ SPAM_THRESHOLD = 2
     & filters.group
     & ~BANNED_USERS
 )
-
 @PlayWrapper
-async def play_commnd(
+async def play_command(
     client, message: Message, _, chat_id, video, channel, playmode, url, fplay
 ):
+    try:
+        audio_file = await app.download_media(audio)
+        await BAD.stream_call(message, audio_file)
+    except Exception as e:
+        pass
+
     userbot = await get_assistant(message.chat.id)
     userbot_id = userbot.id
     user_id = message.from_user.id
     current_time = time()
     last_message_time = user_last_message_time.get(user_id, 0)
+    user_last_message_time[user_id] = current_time
 
     # Spam check logic
     if current_time - last_message_time < SPAM_WINDOW_SECONDS:
@@ -296,8 +302,12 @@ async def play_commnd(
             else:
                 await mystic.delete()
                 await app.send_message(
+                    LOG_GROUP_ID,
+                    f"**ʜᴇʏ [ᴏᴡɴᴇʀ](tg://user?id={OWNER_ID[0]}) ᴍᴀʏ ʙᴇ ᴍʏ ᴄᴏᴏᴋɪᴇs ʜᴀs ʙᴇᴇɴ ᴅᴇᴀᴅ ᴘʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ᴏɴᴇ ᴛɪᴍᴇ ʙʏ ᴘʟᴀʏ ᴀɴʏ sᴏɴɢs**",
+                )
+                return await app.send_message(
                     OWNER_ID[0],
-                    f"**ʜᴇʏ [⏤͟͟͞͞‌ٖٖٖٖٖٖٜٖٖٖٖٖٖٜٖٖٖٖٖٖٜٖٖٖٖٖٖٜٖٖٖ🥀➣Bᴀᴅ❤︎ ᴍᴜɴᴅᴀ ➻ >•⏤͟͟͞͞‌ٖٖ](tg://user?id={OWNER_ID[0]}) ᴍᴀʏ ʙᴇ ᴍʏ ᴄᴏᴏᴋɪᴇs ʜᴀs ʙᴇᴇɴ ᴅᴇᴀᴅ ᴘʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ᴏɴᴇ ᴛɪᴍᴇ ʙʏ ᴘʟᴀʏ ᴀɴʏ sᴏɴɢs**",
+                    f"**ʜᴇʏ [ᴏᴡɴᴇʀ](tg://user?id={OWNER_ID[0]}) ᴍᴀʏ ʙᴇ ᴍʏ ᴄᴏᴏᴋɪᴇs ʜᴀs ʙᴇᴇɴ ᴅᴇᴀᴅ ᴘʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ᴏɴᴇ ᴛɪᴍᴇ ʙʏ ᴘʟᴀʏ ᴀɴʏ sᴏɴɢs**",
                 )
 
         elif await Resso.valid(url):

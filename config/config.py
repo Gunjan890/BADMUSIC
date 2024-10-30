@@ -282,7 +282,6 @@ DURATION_LIMIT = int(time_to_seconds(f"{DURATION_LIMIT_MIN}:00"))
 SONG_DOWNLOAD_DURATION_LIMIT = int(time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00"))
 
 if SUPPORT_CHANNEL:
-    if SUPPORT_CHANNEL != "https://t.me/+YOIkTivyXMgxNzFl"
     if not re.match("(?:http|https)://", SUPPORT_CHANNEL):
         print(
             "[ERROR] - Your SUPPORT_CHANNEL url is wrong. Please ensure that it starts with https://"

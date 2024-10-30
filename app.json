@@ -64,9 +64,19 @@
         "value": "-100",
         "required": true
       },
+      "TOKEN_ALLOW": {
+        "description": "Fill 'True' if you want to use Token data for play youtube songs, Fill 'False' to use cookies (song will play by cookies)",
+        "value": "True",
+        "required": false
+      },
+      "TOKEN_DATA": {
+        "description": "Fill here token data if you have otherwise ignore this and use cookies method for play youtube songs",
+        "value": "",
+        "required": false
+      },
       "UPSTREAM_REPO": {
         "description": "If you dont know this, Leave as it is",
-        "value": "https://github.com/Gunjan890/BADMUSIC",
+        "value": "https://github.com/Badhacker98/BADMUSIC",
         "required": true
       },
       "UPSTREAM_BRANCH": {

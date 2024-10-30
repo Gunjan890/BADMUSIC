@@ -1,4 +1,3 @@
-
 import asyncio
 import random
 import string
@@ -34,7 +33,7 @@ user_command_count = {}
 SPAM_WINDOW_SECONDS = 5  # Set the time window for spam checks (5 seconds for example)
 SPAM_THRESHOLD = 2
 
-audio = "CQACAgUAAx0CdRUi1wABAUQ3Zx2GHIqq269V3VKFNWFS5RSiTpUAAu4TAAJl6fFUeEVpdWbJ-KEeBA"
+# audio = "CQACAgUAAx0CdRUi1wABAUYuZx3rQCprbybe1cDBm-2qK28Pro0AAqcRAAIdP_BUu66Uhq1OkKseBA"
 
 
 @app.on_message(
@@ -58,11 +57,6 @@ audio = "CQACAgUAAx0CdRUi1wABAUQ3Zx2GHIqq269V3VKFNWFS5RSiTpUAAu4TAAJl6fFUeEVpdWb
 async def play_command(
     client, message: Message, _, chat_id, video, channel, playmode, url, fplay
 ):
-    try:
-        audio_file = await app.download_media(audio)
-        await BAD.stream_call(message, audio_file)
-    except Exception as e:
-        pass
 
     userbot = await get_assistant(message.chat.id)
     userbot_id = userbot.id

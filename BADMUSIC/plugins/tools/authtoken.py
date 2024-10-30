@@ -107,19 +107,19 @@ async def check_auth_token():
     & SUDOERS
 )
 async def list_formats(client, message):
-    status_message = "**Status:**\n\n"
-    status_message += "Cookies: Checking...\nAuth Token: Checking..."
+    status_message = "sᴛᴀᴛᴜs⚣\n\n"
+    status_message += "ᴄᴏᴏᴋɪᴇs⚣︎ ᴄʜᴇᴄᴋɪɴɢ ... \nᴀᴜᴛʜ ᴛᴏᴋᴇɴ⚣︎ ᴄʜᴇᴄᴋɪɴɢ..."
     status_msg = await message.reply_text(status_message)
 
     cookie_status = await check_cookies("https://www.youtube.com/watch?v=LLF3GMfNEYU")
-    status_message = "**Status:**\n\n"
-    status_message += f"Cookies: {'✅ Alive' if cookie_status else '❌ Dead'}\nAuth Token: Checking..."
+    status_message = "sᴛᴀᴛᴜs⚣\n\n"
+    status_message += f"ᴄᴏᴏᴋɪᴇs⚣︎ {'✅ ᴀʟɪᴠᴇ' if cookie_status else '❌ ᴅᴇᴀᴅ'}\nAuth Token: Checking..."
     await status_msg.edit_text(status_message)
 
     use_token = await check_auth_token()
-    status_message = "**Status:**\n\n"
-    status_message += f"Cookies: {'✅ Alive' if cookie_status else '❌ Dead'}\n"
-    status_message += f"Auth Token: {'✅ Alive' if use_token else '❌ Dead'}"
+    status_message = "sᴛᴀᴛᴜs⚣︎\n\n"
+    status_message += f"ᴄᴏᴏᴋɪᴇs⚣︎ {'✅ ᴀʟɪᴠᴇ' if cookie_status else '❌ ᴅᴇᴀᴅ'}\n"
+    status_message += f"ᴀᴜᴛʜ ᴛᴏᴋᴇɴ⚣︎ {'✅ ᴀʟɪᴠᴇ' if use_token else '❌ ᴅᴇᴀᴅ'}"
     await status_msg.edit_text(status_message)
 
     if not use_token:
@@ -134,3 +134,4 @@ async def list_formats(client, message):
             await message.reply_text(
                 f"\n**❌ Failed to generate a new token: {str(ex)}**"
             )
+            

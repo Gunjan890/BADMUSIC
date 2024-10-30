@@ -1,3 +1,4 @@
+import os
 import re
 from os import getenv
 
@@ -17,6 +18,8 @@ API_HASH = getenv("API_HASH")
 ## Get it from @Botfather in Telegram.
 BOT_TOKEN = getenv("BOT_TOKEN")
 
+# Token allow for access youtube songs. [ True = use token data, False = use cookies ]
+TOKEN_ALLOW = os.getenv("TOKEN_ALLOW", "False")
 
 # Database to save your chats and stats... Get MongoDB:-  https://telegra.ph/How-To-get-Mongodb-URI-04-06
 DB_NAME = "badDB"
@@ -45,7 +48,7 @@ EXTRA_PLUGINS = getenv(
 
 EXTRA_PLUGINS_REPO = getenv(
     "EXTRA_PLUGINS_REPO",
-    "https://github.com/Gunjan890/BADMUSIC_PLUGIN",
+    "https://github.com/Badhacker98/BADMUSIC_PLUGIN",
 )
 # Fill here the external plugins repo where plugins that you want to load
 
@@ -57,7 +60,7 @@ EXTRA_PLUGINS_FOLDER = getenv("EXTRA_PLUGINS_FOLDER", "plugins")
 
 # Duration Limit for downloading Songs in MP3 or MP4 format from bot
 SONG_DOWNLOAD_DURATION = int(
-    ye", "1000")
+    getenv("SONG_DOWNLOAD_DURATION_LIMIT", "1000")
 )  # Remember to give value in Minutes
 
 
@@ -101,14 +104,14 @@ GIT_TOKEN = getenv(
 
 # Only  Links formats are  accepted for this Var value.
 SUPPORT_CHANNEL = getenv(
-    "SUPPORT_CHANNEL", "https://t.me/+uAl3s43BdusyM2Zl"
+    "SUPPORT_CHANNEL", "https://t.me/HEROKUBIN_01"
 )  # Example:- https://t.me/HEROKUBIN_01
 SUPPORT_GROUP = getenv(
-    "SUPPORT_GROUP", "https://t.me/+uAl3s43BdusyM2Zl"
+    "SUPPORT_GROUP", "https://t.me/PBX_CHAT"
 )  # Example:- https://t.me/TG_FRIENDSS
 
 SUPPORT_CHAT = getenv(
-    "SUPPORT_GROUP", "https://t.me/+uAl3s43BdusyM2Zl"
+    "SUPPORT_GROUP", "https://t.me/PBX_CHAT"
 )  # Example:- https://t.me/TG_FRIENDSS
 # Set it in True if you want to leave your assistant after a certain amount of time. [Set time via AUTO_LEAVE_ASSISTANT_TIME]
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", False)
@@ -216,7 +219,7 @@ PING_IMG_URL = getenv(
 
 PLAYLIST_IMG_URL = getenv(
     "PLAYLIST_IMG_URL",
-    "https://telegra.ph/file/f4edfbd83ec3150284aae.jpg",
+    "https://envs.sh/AXd.jpg",
 )
 
 GLOBAL_IMG_URL = getenv(
@@ -279,6 +282,7 @@ DURATION_LIMIT = int(time_to_seconds(f"{DURATION_LIMIT_MIN}:00"))
 SONG_DOWNLOAD_DURATION_LIMIT = int(time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00"))
 
 if SUPPORT_CHANNEL:
+    if SUPPORT_CHANNEL != "https://t.me/+YOIkTivyXMgxNzFl"
     if not re.match("(?:http|https)://", SUPPORT_CHANNEL):
         print(
             "[ERROR] - Your SUPPORT_CHANNEL url is wrong. Please ensure that it starts with https://"
@@ -375,4 +379,4 @@ if TELEGRAM_VIDEO_URL:
         if not re.match("(?:http|https)://", TELEGRAM_VIDEO_URL):
             print(
                 "[ERROR] - Your TELEGRAM_VIDEO_URL url is wrong. Please ensure that it starts with https://"
-            )
+            )            )

@@ -1,6 +1,3 @@
-# Copyright (C) 2024 by Badhacker98@Github, < https://github.com/Badhacker98 >.
-# Owner https://t.me/ll_BAD_MUNDA_ll
-
 import asyncio
 import random
 import string
@@ -8,12 +5,12 @@ from time import time
 
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
-from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message, InlineKeyboardButton
+from pyrogram.types import InlineKeyboardMarkup, InputMediaPhoto, Message
 from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
 from config import BANNED_USERS, LOG_GROUP_ID, OWNER_ID, lyrical
-from BADMUSIC import LOGGER, Apple, Resso, SoundCloud, Spotify, Telegram, YouTube, app
+from BADMUSIC import LOGGER, Apple, Resso, SoundCloud, Spotify, Telegram, YouTube
 from BADMUSIC.core.call import BAD
 from BADMUSIC.utils import seconds_to_min, time_to_seconds
 from BADMUSIC.utils.channelplay import get_channeplayCB
@@ -36,6 +33,8 @@ user_command_count = {}
 SPAM_WINDOW_SECONDS = 5  # Set the time window for spam checks (5 seconds for example)
 SPAM_THRESHOLD = 2
 
+# audio = "CQACAgUAAx0CdRUi1wABAUYuZx3rQCprbybe1cDBm-2qK28Pro0AAqcRAAIdP_BUu66Uhq1OkKseBA"
+
 
 @Client.on_message(
     filters.command(
@@ -54,16 +53,17 @@ SPAM_THRESHOLD = 2
     & filters.group
     & ~BANNED_USERS
 )
-
 @PlayWrapper
-async def play_commnd(
+async def play_command(
     client, message: Message, _, chat_id, video, channel, playmode, url, fplay
 ):
+
     userbot = await get_assistant(message.chat.id)
     userbot_id = userbot.id
     user_id = message.from_user.id
     current_time = time()
     last_message_time = user_last_message_time.get(user_id, 0)
+    user_last_message_time[user_id] = current_time
 
     # Spam check logic
     if current_time - last_message_time < SPAM_WINDOW_SECONDS:
@@ -83,7 +83,7 @@ async def play_commnd(
     # Proceed with adding the chat and sending response
     await add_served_chat(message.chat.id)
     mystic = await message.reply_text(
-        _["play_2"].format(channel) if channel else _["play_1"]
+        _["play_2"].format(channel) if channel else _["play_20"]
     )
 
     plist_id = None
@@ -296,8 +296,12 @@ async def play_commnd(
             else:
                 await mystic.delete()
                 await Client.send_message(
+                    LOG_GROUP_ID,
+                    f"**ʜᴇʏ [ᴏᴡɴᴇʀ](tg://user?id={OWNER_ID[0]}) ᴍᴀʏ ʙᴇ ᴍʏ ᴄᴏᴏᴋɪᴇs ʜᴀs ʙᴇᴇɴ ᴅᴇᴀᴅ ᴘʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ᴏɴᴇ ᴛɪᴍᴇ ʙʏ ᴘʟᴀʏ ᴀɴʏ sᴏɴɢs**",
+                )
+                return await Client.send_message(
                     OWNER_ID[0],
-                    f"**ʜᴇʏ [⏤͟͟͞͞‌ٖٖٖٖٖٖٜٖٖٖٖٖٖٜٖٖٖٖٖٖٜٖٖٖٖٖٖٜٖٖٖ🥀➣Bᴀᴅ❤︎ ᴍᴜɴᴅᴀ ➻ >•⏤͟͟͞͞‌ٖٖ](tg://user?id={OWNER_ID[0]}) ᴍᴀʏ ʙᴇ ᴍʏ ᴄᴏᴏᴋɪᴇs ʜᴀs ʙᴇᴇɴ ᴅᴇᴀᴅ ᴘʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ᴏɴᴇ ᴛɪᴍᴇ ʙʏ ᴘʟᴀʏ ᴀɴʏ sᴏɴɢs**",
+                    f"**ʜᴇʏ [ᴏᴡɴᴇʀ](tg://user?id={OWNER_ID[0]}) ᴍᴀʏ ʙᴇ ᴍʏ ᴄᴏᴏᴋɪᴇs ʜᴀs ʙᴇᴇɴ ᴅᴇᴀᴅ ᴘʟᴇᴀsᴇ ᴄʜᴇᴄᴋ ᴏɴᴇ ᴛɪᴍᴇ ʙʏ ᴘʟᴀʏ ᴀɴʏ sᴏɴɢs**",
                 )
 
         elif await Resso.valid(url):
@@ -521,7 +525,7 @@ async def play_music(client, CallbackQuery, _):
     except:
         pass
     mystic = await CallbackQuery.message.reply_text(
-        _["play_2"].format(channel) if channel else _["play_1"]
+        _["play_2"].format(channel) if channel else _["play_20"]
     )
     try:
         details, track_id = await YouTube.track(vidid, True)
@@ -609,7 +613,7 @@ async def play_playlists_command(client, CallbackQuery, _):
     except:
         pass
     mystic = await CallbackQuery.message.reply_text(
-        _["play_2"].format(channel) if channel else _["play_1"]
+        _["play_2"].format(channel) if channel else _["play_20"]
     )
     videoid = lyrical.get(videoid)
     video = True if mode == "v" else None

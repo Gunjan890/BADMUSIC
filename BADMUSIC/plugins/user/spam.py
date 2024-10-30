@@ -148,4 +148,3 @@ async def stopSpam(_, message: Message):
     chat_name = message.chat.title or message.chat.first_name
     del spamTask[chat_id]
     await Client.delete(message, f"Spam task stopped for {chat_name}.")
-

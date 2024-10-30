@@ -2,12 +2,13 @@
 # Owner https://t.me/ll_BAD_MUNDA_ll
 
 import asyncio
+import os
 from datetime import datetime, timedelta
 from typing import Union
 
 from ntgcalls import TelegramServerError
 from pyrogram import Client
-from pyrogram.enums import ChatMemberStatus
+from pyrogram.enums import ChatMembersFilter, ChatMemberStatus
 from pyrogram.errors import (
     ChatAdminRequired,
     FloodWait,
@@ -48,8 +49,9 @@ from BADMUSIC.utils.exceptions import AssistantErr
 from BADMUSIC.utils.formatters import check_duration, seconds_to_min, speed_converter
 from BADMUSIC.utils.inline.play import stream_markup, telegram_markup
 from BADMUSIC.utils.stream.autoclear import auto_clean
-from BADMUSIC.utils.thumbnails import get_thumb
+from BADMUSIC.utils.thumbnails import gen_thumb
 
+active = []
 autoend = {}
 counter = {}
 AUTO_END_TIME = 1
@@ -62,14 +64,47 @@ async def _st_(chat_id):
 
 
 async def _clear_(chat_id):
+    # Clearing the chat ID data in the database
     db[chat_id] = []
 
-    await remove_active_video_chat(chat_id)
-    await remove_active_chat(chat_id)
+    # Removing active video chat and chat records
+    try:
+        await remove_active_video_chat(chat_id)
+        await remove_active_chat(chat_id)
+    except Exception as e:
+        print(f"Error removing active chats: {e}")
 
-    await app.send_message(
-        chat_id, f"🎶 **ꜱᴏɴɢ ʜᴀꜱ ᴇɴᴅᴇᴅ ɪɴ ᴠᴄ.** ᴅᴏ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ʜᴇᴀʀ ᴍᴏʀᴇ sᴏɴɢs?"
-    )
+    # Preparing the text for admin mentions
+    text = ""
+
+    try:
+        # Fetching admins from the chat
+        admins = [
+            admin.user.id
+            async for admin in app.get_chat_members(
+                chat_id, filter=ChatMembersFilter.ADMINISTRATORS
+            )
+        ]
+
+        # Looping through each admin to check if they are not a bot or deleted
+        for admin in admins:
+            admin_member = await app.get_chat_member(chat_id, admin)
+            if not admin_member.user.is_bot and not admin_member.user.is_deleted:
+                text += f"[\u2063](tg://user?id={admin})"
+    except Exception as e:
+        await app.send_message(
+            chat_id,
+            f"**ᴄᴏᴜʟᴅ ɪ ɢᴇᴛ ᴀᴅᴍɪɴ ᴀᴄᴄᴇss? ɪᴛ ᴡɪʟʟ ʜᴇʟᴘ ᴋᴇᴇᴘ ᴛʜᴇ sᴏɴɢs ᴘʟᴀʏɪɴɢ ᴍᴏʀᴇ ʀᴇʟɪᴀʙʟʏ. ᴛʜᴀɴᴋs ɪɴ ᴀᴅᴠᴀɴᴄᴇ! 🎵😊{text}**",
+        )
+
+    # Sending the final message
+    try:
+        await app.send_message(
+            chat_id,
+            f"**🎧 ꜱᴏɴɢ ʜᴀꜱ ᴇɴᴅᴇᴅ ɪɴ ᴠᴄ 💞**{text}",
+        )
+    except Exception as e:
+        print(f"Error sending message: {e}")
 
 
 class Call(PyTgCalls):
@@ -300,14 +335,12 @@ class Call(PyTgCalls):
             db[chat_id][0]["speed_path"] = out
             db[chat_id][0]["speed"] = speed
 
-    async def stream_call(self, link):
-        assistant = await group_assistant(self, config.LOG_GROUP_ID)
+    async def stream_call(self, message, link):
+        assistant = await group_assistant(self, message.chat.id)
         await assistant.join_group_call(
-            config.LOG_GROUP_ID,
+            message.chat.id,
             MediaStream(link),
         )
-        await asyncio.sleep(0.5)
-        await assistant.leave_group_call(config.LOG_GROUP_ID)
 
     async def join_assistant(self, original_chat_id, chat_id):
         language = await get_lang(original_chat_id)
@@ -378,6 +411,7 @@ class Call(PyTgCalls):
         video: Union[bool, str] = None,
         image: Union[bool, str] = None,
     ):
+        await asyncio.sleep(1)
         assistant = await group_assistant(self, chat_id)
         audio_stream_quality = await get_audio_bitrate(chat_id)
         video_stream_quality = await get_video_bitrate(chat_id)

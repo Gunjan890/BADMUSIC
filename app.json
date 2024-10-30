@@ -66,7 +66,7 @@
       },
       "UPSTREAM_REPO": {
         "description": "If you dont know this, Leave as it is",
-        "value": "https://github.com/Badhacker98/BADMUSIC",
+        "value": "https://github.com/Gunjan890/BADMUSIC",
         "required": true
       },
       "UPSTREAM_BRANCH": {

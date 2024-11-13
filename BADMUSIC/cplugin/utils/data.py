@@ -1189,13 +1189,6 @@ RAID = [
 ]
 
 
-GRP = "@HEROKUBIN_01|@ll_BAD_ABOUT_ll|@ll_BAD_MUNDA_WORLD_ll|@THE_PUNJABI_BANDE"
-
-GROUP = [-1002056907061]
-
-VERIFIED_USERS = [7009601543]
-
-Owners = "@II_BAD_MUNDA_II"
 
 PORM = [
         "https://telegra.ph/file/9bcc076fd81dfe3feb291.mp4",
